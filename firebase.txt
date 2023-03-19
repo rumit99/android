@@ -1,0 +1,44 @@
+  implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-database:20.0.5'
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
+
+
+
+one model class with constructor
+
+
+  DatabaseReference mDatabaseloc;
+  mDatabaseloc = FirebaseDatabase.getInstance().getReference("cart");
+
+
+ mDatabaseloc.child("").setValue(product).addOnSuccessListener(runnable -> {
+              
+            }).addOnFailureListener(runnable -> {
+               
+            });
+
+
+///////////////////////////////////
+
+
+//      Query  needsQuery = databaseReference.orderByChild("index");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressBar.setVisibility(View.VISIBLE);
+                imagesList.clear();
+              
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    imagesList.add(product);
+                }
+                uiDataUpdate();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
