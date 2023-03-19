@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:color="@color/colorAccent"
+        android:checked="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_briefing"
+        android:color="@color/colorAccent"
+        android:icon="@drawable/ic_suitcase"
+        android:title="Briefing" />
+
+    <item
+        android:id="@+id/navigation_trending"
+        android:color="@color/colorAccent"
+        android:icon="@drawable/ic_newspaper"
+        android:title="Trending" />
+
+    <item
+        android:id="@+id/navigation_premium"
+        android:color="@color/colorAccent"
+        android:icon="@drawable/ic_workspace_premium"
+        android:title="Premium" />
+
+</menu>

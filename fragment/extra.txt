@@ -1,0 +1,4 @@
+  implementation 'io.ak1:bubbletabbar:1.0.8'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
+
