@@ -1,0 +1,32 @@
+ try {
+            String FEED_URL = "" + Network.DomainUrl(getApplicationContext()) + "" + Network.DomainService(getApplicationContext()) + "" + Network.DomainServicePage(getApplicationContext());
+
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("device", "android");
+            jsonParam.put("api_key", "hindu@9*M");
+            jsonParam.put("id", "" + Id);
+            jsonParam.put("type", "GN");
+            jsonParam.put("lut", 0);
+            jsonParam.put("page", page);
+
+//            System.out.println("" + jsonParam);
+            new WebServicePost(this, FEED_URL, jsonParam, new OnTaskDoneListener() {
+                @Override
+                public void onTaskDone(String responseData) {
+                    parseResult(responseData);
+                }
+
+                @Override
+                public void onError() {
+                    Toast.makeText(ActivityNewsList.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(String responseData) {
+                    System.out.println("Error! " + responseData);
+                }
+            }).execute();
+        } catch (Exception ex) {
+            System.out.println("" + ex);
+        }
+

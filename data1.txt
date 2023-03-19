@@ -70,6 +70,10 @@ SharedPrefsUrl.getString("Url", null);
 
 -----------------------------------------------------
 
+for model class firebase
+ 
+@IgnoreExtraProperties
+@Exclude
 
-
+-----------------------------
 

@@ -1,0 +1,41 @@
+  String FEED_URL = "https://fakestoreapi.com/products";
+
+            new WebService(this, FEED_URL, new OnTaskDoneListener() {
+                @Override
+                public void onTaskDone(String responseData) {
+                    parseResult(responseData);
+                }
+
+                @Override
+                public void onError() {
+                    Toast.makeText(ActivityMain.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                    System.out.println("Failed to fetch data!");
+                }
+
+                @Override
+                public void onError(String responseData) {
+                    System.out.println("Error! " + responseData);
+                }
+            }).execute();
+
+
+
+---------------------------------
+
+    JSONObject obj = new JSONObject(responseData);
+
+            String ResponseStatus = String.valueOf(obj.getJSONObject("data").getInt("s"));
+            if (ResponseStatus.equalsIgnoreCase("1")) {
+                JSONArray Results = obj.getJSONObject("data").getJSONArray("article"); // notice that `"Results": [...]`
+//              
+            if (Results.length() > 0) {
+
+                for (int i = 0; i < Results.length(); i++) {
+                    JSONObject inside = Results.getJSONObject(i);
+               
+                    setImage(inside.getString("image"));
+                
+                }
+
+
+---------------------------------------
