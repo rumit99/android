@@ -1,0 +1,21 @@
+  AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity2.this);
+        LayoutInflater inflater = ((Activity) MainActivity2.this).getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.confirm_msg, null);
+
+        builder.setCancelable(true);
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+        // Get the custom alert dialog view widgets reference
+        TextView bttnSubmit = (TextView) dialogView.findViewById(R.id.bttnSubmit);
+        AlertDialog dialog = builder.create();
+        // Set positive/yes button click listener
+        bttnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+              
+            }
+        });
+     
+        // Display the custom alert dialog on interface
+        dialog.show();
