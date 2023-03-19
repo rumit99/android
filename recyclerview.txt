@@ -1,0 +1,89 @@
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+
+<androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:clipToPadding="false"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+
+RecyclerView recyclerView;
+    private ArrayList<Product> imagesList;
+    private ProductCartAdapter productCartAdapter = null;
+
+
+
+recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+
+
+imagesList = new ArrayList<>();
+productCartAdapter = new ProductCartAdapter(ActivityCheckOut.this, ActivityCheckOut.this, imagesList);
+      recyclerView.setAdapter(productCartAdapter);
+	productCartAdapter.notifyDataSetChanged();
+
+
+
+
+
+
+public class ProductCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private Context mContext;
+    private ActivityCheckOut mActivity;
+    private ArrayList<Product> mContentList;
+
+    public ProductCartAdapter(Context mContext, ActivityCheckOut mActivity, ArrayList<Product> mContentList) {
+        this.mContext = mContext;
+        this.mActivity = mActivity;
+        this.mContentList = mContentList;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_check_out_item, parent, false);
+        return new ViewHolder(view, viewType);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView iv_image;
+        TextView tv_Title;
+     
+
+        public ViewHolder(View itemView, int viewType) {
+            super(itemView);
+            iv_image = itemView.findViewById(R.id.iv_image);
+            tv_Title = itemView.findViewById(R.id.tv_Title);
+//            iv_image.setClipToOutline(true);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder mainHolder, int position) {
+        ViewHolder holder = (ViewHolder) mainHolder;
+        final Product model = mContentList.get(position);
+        // setting data over views
+
+        holder.tv_Title.setText(model.getName());
+      Glide.with(mContext).load(model.getImage()).thumbnail(0.05f).transition(DrawableTransitionOptions.withCrossFade()).error(mContext.getResources().getDrawable(R.drawable.logo)).into(holder.iv_image);
+        holder.itemView.setOnClickListener(view -> {
+
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mContentList.size();
+    }
+}
+
+
+
